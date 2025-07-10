@@ -18,7 +18,7 @@ const PORT = process.env.PORT
 
 // Middleware
 app.use(cors({
-    origin: '*'
+    origin: 'https://my-portfolio-1frontend.onrender.com'
 }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
