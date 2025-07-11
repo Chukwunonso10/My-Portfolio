@@ -2,7 +2,7 @@ import { Github, Linkedin, Twitter, ArrowDown, Code, Sparkles } from "lucide-rea
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden ">
       {/* Animated background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20">
         <div className="absolute top-10 left-10 w-72 h-72 bg-blue-300/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
