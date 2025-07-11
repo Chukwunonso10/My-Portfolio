@@ -37,6 +37,7 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
+    
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-in fade-in duration-700">
@@ -44,6 +45,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
+          
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item, index) => (
               <a
@@ -58,7 +60,7 @@ const Header = () => {
             ))}
            
           </div>
-
+            <Toggletheme />
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center space-x-2">
             <Toggletheme/>
