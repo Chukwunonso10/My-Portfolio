@@ -21,8 +21,15 @@ const Projects = () => {
     try {
       setLoading(true)
       const response = await projectsAPI.getAll()
-
-      
+      setProjects(response.data)
+      setFilteredProjects(response.data)
+    } catch (err) {
+      setError("Failed to fetch projects")
+      console.error("Error fetching projects:", err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const filterProjects = async (category) => {
     setActiveFilter(category)
