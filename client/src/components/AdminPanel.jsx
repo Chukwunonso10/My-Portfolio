@@ -8,6 +8,8 @@ import { projectsAPI } from "@/services/api"
 import { useEffect } from "react"
 
 const AdminPanel = () => {
+    const [projects, setProjects] = useState([])
+    const [editingId, setEditingId] = useState(null)
     const [ isAdmin, setIsAdmin ] = useState(false)
     const [formData, setFormData] = useState({
         title: "",
@@ -19,6 +21,26 @@ const AdminPanel = () => {
         featured: false,
   })
 
+    const fetchProjects = async () => {
+    try {
+        const res =await projectsAPI.getAll()
+        setProjects(res.data)
+
+    } catch (error) {
+        console.error("Error fetching projects:",error)
+    }
+  }
+
+   useEffect(() => {
+    const token = localStorage.getItem("admin_token")
+    if (token === import.meta.env.VITE_ADMIN_SECRET) {
+      setIsAdmin(true)
+      fetchProjects();
+    }
+  }, [])
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -26,12 +48,16 @@ const AdminPanel = () => {
         ...formData,
         technologies: formData.technologies.split(",").map((tech) => tech.trim()),
       }
-
-      const response = await projectsAPI.addNew(projectData)
+      let response;
+      if (editingId){
+        response = await projectsAPI.UpdateProject(editingId, projectData)
+        alert("Project updated!")
+      }else{
+        response = await projectsAPI.addNew(projectData)
+         alert("Project added successfully!")
+      }
     
-
-      if (response.ok) {
-        alert("Project added successfully!")
+      if (response) {
         setFormData({
           title: "",
           description: "",
@@ -42,7 +68,10 @@ const AdminPanel = () => {
           featured: false,
         })
       }
+      setEditingId(null)
+      fetchProjects()
     } catch (error) {
+        console.error("Eror submitting:", error)
       alert("Error adding project")
     }
   }
@@ -51,18 +80,12 @@ const AdminPanel = () => {
     const input = prompt("Enter Admin Key:")
     if (input === import.meta.env.VITE_ADMIN_SECRET) {
       localStorage.setItem("admin_token", input)
-      setIsAdmin(false)
+      setIsAdmin(true)
     } else {
       alert("Access denied")
     }
   }
 
-  useEffect(() => {
-    const token = localStorage.getItem("admin_token")
-    if (token === import.meta.env.VITE_ADMIN_SECRET) {
-      setIsAdmin(true)
-    }
-  }, [])
 
    if (!isAdmin) {
     return (
@@ -71,6 +94,32 @@ const AdminPanel = () => {
       </div>
     )
   }
+
+  const handleDelete = async(id) =>{
+    if (!confirm("Are you sure?")) return
+    try {
+        await projectsAPI.DeleteProject(id)
+        alert("Project deleted!")
+        fetchProjects()
+    } catch (error) {
+        alert("Error deleting project")
+    }
+  }
+
+  const handleEdit = (project) => {
+  setFormData({
+    title: project.title,
+    description: project.description,
+    technologies: project.technologies.join(", "),
+    githubUrl: project.githubUrl,
+    liveUrl: project.liveUrl,
+    category: project.category,
+    featured: project.featured,
+  })
+  setEditingId(project._id)
+}
+
+
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
@@ -127,9 +176,26 @@ const AdminPanel = () => {
         <Button type="submit" className="w-full">
             Add Project
         </Button>
-
       </form>
-    </div>
+
+      <h3 className="text-xl font-bold mt-10 mb-4">Manage Projects</h3>
+        <ul className="space-y-4">
+        {projects.map((project) => (
+         <li key={project._id} className="border p-4 rounded-md bg-gray-50 flex justify-between items-start">
+      <div>
+        <h4 className="font-semibold text-lg">{project.title}</h4>
+        <p className="text-sm text-gray-600">{project.description}</p>
+        <p className="text-xs text-gray-500">{project.category}</p>
+      </div>
+      <div className="space-x-2">
+        <Button variant="secondary" className="bg-green-400 px-6" onClick={() => handleEdit(project)}>Edit</Button>
+        <Button variant="destructive" onClick={() => handleDelete(project._id)}>Delete</Button>
+      </div>
+        </li>
+            ))}
+        </ul>
+
+        </div>
   )
 }
 

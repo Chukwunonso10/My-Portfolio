@@ -31,13 +31,13 @@ const Projects = () => {
     }
   }
 
-  const filterProjects = async (category) => {
+  const filterProjects = (category) => {
     setActiveFilter(category)
-    try {
-      const response = await projectsAPI.getAll(category)
-      setFilteredProjects(response.data)
-    } catch (err) {
-      console.error("Error filtering projects:", err)
+    if (category){
+      setFilteredProjects(projects)
+    }else{
+      const filtered = projects.filter(project => project.category === category)
+      setFilteredProjects(filtered)
     }
   }
 
