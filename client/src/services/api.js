@@ -17,7 +17,10 @@ export const projectsAPI = {
   },
   getFeatured: () => api.get("/projects/featured"),
   getById: (id) => api.get(`/projects/${id}`),
-  create: (projectData) => api.post("/projects", projectData),
+  addNew: (projectData) => api.post("/admin/projects", projectData, 
+                        {headers: {
+        "x-admin-secret": import.meta.env.VITE_ADMIN_SECRET}}
+  )
 }
 
 // Contact API

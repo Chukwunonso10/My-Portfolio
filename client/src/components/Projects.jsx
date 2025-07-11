@@ -21,6 +21,22 @@ const Projects = () => {
     try {
       setLoading(true)
       const response = await projectsAPI.getAll()
+
+       // Add your new project temporarily
+      const newProject = {
+        _id: "temp-id-" + Date.now(),
+        title: "Your New Project",
+        description: "Description of your new project",
+        image: "/placeholder.svg?height=300&width=400",
+        technologies: ["React", "Node.js", "MongoDB"],
+        githubUrl: "https://github.com/yourusername/project",
+        liveUrl: "https://your-project.com",
+        category: "Full Stack",
+        featured: true,
+        createdAt: new Date().toISOString(),
+      }
+
+      const projectsWithNew = [newProject, ...response.data]
       setProjects(response.data)
       setFilteredProjects(response.data)
     } catch (err) {
@@ -40,6 +56,7 @@ const Projects = () => {
       console.error("Error filtering projects:", err)
     }
   }
+
 
   if (loading) {
     return (
@@ -220,6 +237,7 @@ const Projects = () => {
           </div>
         )}
       </div>
+
     </section>
   )
 }

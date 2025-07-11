@@ -34,8 +34,8 @@ const Hero = () => {
           about creating exceptional digital experiences with{" "}
           <span className="font-semibold text-green-600 dark:text-green-400">MongoDB</span>,{" "}
           <span className="font-semibold text-yellow-600 dark:text-yellow-400">Express.js</span>,{" "}
-          <span className="font-semibold text-blue-600 dark:text-blue-400">React</span>, and{" "}
-          <span className="font-semibold text-green-600 dark:text-green-400">Node.js</span>.{" "}
+          <span className="font-semibold text-blue-600 dark:text-blue-400">React</span>, {" "}
+          <span className="font-semibold text-green-600 dark:text-green-400">Node.js and </span>{" "}
           <span className="font-semibold text-green-600 dark:text-green-400">Python</span>.
         </p>
 
@@ -57,9 +57,9 @@ const Hero = () => {
 
         <div className="flex justify-center space-x-8 mb-12 animate-in slide-in-from-bottom duration-1000 delay-1000">
           {[
-            { icon: Github, href: "https://github.com", color: "hover:text-gray-800 dark:hover:text-gray-200" },
-            { icon: Linkedin, href: "https://linkedin.com", color: "hover:text-blue-600 dark:hover:text-blue-400" },
-            { icon: Twitter, href: "https://twitter.com", color: "hover:text-blue-400 dark:hover:text-blue-300" },
+            { icon: Github, href: "https://github.com/Chukwunonso10", color: "hover:text-gray-800 dark:hover:text-gray-200" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/kuzue-chukwunonso/", color: "hover:text-blue-600 dark:hover:text-blue-400" },
+            { icon: Twitter, href: "https://x.com/kuzue_chinonso", color: "hover:text-blue-400 dark:hover:text-blue-300" },
           ].map((social, index) => (
             <a
               key={index}

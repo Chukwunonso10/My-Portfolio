@@ -9,6 +9,7 @@ import Projects from "./components/Projects"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import AnimatedIntro from "./components/AnimatedIntro"
+import AdminPanel from "./components/AdminPanel"
 import "./App.css"
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <AdminPanel />
         <Contact />
       </main>
       <Footer />
