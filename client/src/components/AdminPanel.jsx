@@ -123,7 +123,7 @@ const AdminPanel = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6">Add New Project</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Add New Project</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           placeholder="Project Title"
@@ -178,7 +178,7 @@ const AdminPanel = () => {
         </Button>
       </form>
 
-      <h3 className="text-xl font-bold mt-10 mb-4">Manage Projects</h3>
+      <h3 className="text-xl font-bold mt-10 mb-4 text-center">Manage Projects</h3>
         <ul className="space-y-4">
         {projects.map((project) => (
          <li key={project._id} className="border p-4 rounded-md bg-gray-50 flex justify-between items-start">
